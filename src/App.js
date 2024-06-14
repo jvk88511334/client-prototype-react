@@ -6,6 +6,8 @@ import HomeView3 from './views/HomeView3';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import LoginView from "./views/LoginView";
+import RegisterView from './views/RegisterView';
+import ForgotPasswordView from './views/ForgotPasswordView';
 
 function App() {
     return (
@@ -18,6 +20,8 @@ function App() {
                         <Route path="/view2" element={<HomeView2 />} />
                         <Route path="/view3" element={<HomeView3 />} />
                         <Route path="/login" element={<LoginView />} />
+                        <Route path="/register" element={<RegisterView />} />
+                        <Route path="/forgot-password" element={<ForgotPasswordView />} />
                     </Routes>
                 </main>
                 <Footer />
