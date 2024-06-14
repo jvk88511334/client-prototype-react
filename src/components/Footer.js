@@ -1,5 +1,6 @@
 import React from 'react';
 import { AppBar, Toolbar, Typography, Container, Box, Link } from '@mui/material';
+import { Link as RouterLink } from 'react-router-dom';
 
 function Footer() {
     return (
@@ -10,13 +11,13 @@ function Footer() {
                         &copy; {new Date().getFullYear()} Nom de l'Application. Tous droits réservés.
                     </Typography>
                     <Box>
-                        <Link href="#" color="inherit" sx={{ marginRight: 2 }}>
+                        <Link component={RouterLink} to="/" color="inherit" sx={{ marginRight: 2 }}>
                             Lien 1
                         </Link>
-                        <Link href="#" color="inherit" sx={{ marginRight: 2 }}>
+                        <Link component={RouterLink} to="/view2" color="inherit" sx={{ marginRight: 2 }}>
                             Lien 2
                         </Link>
-                        <Link href="#" color="inherit">
+                        <Link component={RouterLink} to="/view3" color="inherit">
                             Lien 3
                         </Link>
                     </Box>
