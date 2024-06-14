@@ -2,9 +2,11 @@ import React, {useState} from 'react';
 import {AppBar, Toolbar, IconButton, Typography, Button} from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import SideDrawer from './SideDrawer';
+import { Link as RouterLink } from 'react-router-dom';
 
 function Navbar() {
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     const handleDrawerOpen = () => {
         setIsDrawerOpen(true);
@@ -12,6 +14,11 @@ function Navbar() {
 
     const handleDrawerClose = () => {
         setIsDrawerOpen(false);
+    };
+
+    const handleLogout = () => {
+        // Logique de déconnexion (à implémenter plus tard avec un backend)
+        setIsLoggedIn(false);
     };
 
     return (
@@ -31,8 +38,14 @@ function Navbar() {
                     <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                         Nom de l'Application
                     </Typography>
-                    <Button color="inherit">À propos</Button>
-                    {/* Reste du contenu de la barre de navigation */}
+                    <Button color="inherit" component={RouterLink} to="/login">
+                        Connexion
+                    </Button>
+                    {isLoggedIn && (
+                        <Button color="inherit" onClick={handleLogout}>
+                            Déconnexion
+                        </Button>
+                    )}
                 </Toolbar>
             </AppBar>
             <SideDrawer open={isDrawerOpen} onClose={handleDrawerClose} />

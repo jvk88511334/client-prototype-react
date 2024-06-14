@@ -5,6 +5,7 @@ import HomeView2 from './views/HomeView2';
 import HomeView3 from './views/HomeView3';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import LoginView from "./views/LoginView";
 
 function App() {
     return (
@@ -16,6 +17,7 @@ function App() {
                         <Route path="/" element={<HomeView1 />} />
                         <Route path="/view2" element={<HomeView2 />} />
                         <Route path="/view3" element={<HomeView3 />} />
+                        <Route path="/login" element={<LoginView />} />
                     </Routes>
                 </main>
                 <Footer />
