@@ -35,7 +35,7 @@ CMD ["nginx", "-g", "daemon off;"]
 ```
 
 2. Dans votre dépôt GitHub, allez dans "Settings" > "Secrets" et créez deux secrets :
-    - `DOCKERHUB_USERNAME`: votre nom d'utilisateur Docker Hub (jeromey34 dans la capture d'écran)
+    - `DOCKERHUB_USERNAME`: votre nom d'utilisateur Docker Hub (jeromev34 dans la capture d'écran)
     - `DOCKERHUB_TOKEN`: votre jeton d'accès Docker Hub
 
 ---
@@ -45,7 +45,7 @@ Voici les étapes à suivre :
 
 Cliquez sur le bouton "New repository secret" dans la section "Repository secrets".
 Sur la page suivante, vous verrez des champs pour entrer le nom et la valeur du secret.
-Pour le premier secret, entrez DOCKERHUB_USERNAME dans le champ "Name" et votre nom d'utilisateur Docker Hub (jeromey34 dans votre cas) dans le champ "Value".
+Pour le premier secret, entrez DOCKERHUB_USERNAME dans le champ "Name" et votre nom d'utilisateur Docker Hub (jeromev34 dans votre cas) dans le champ "Value".
 Cliquez sur "Add secret" pour enregistrer le secret DOCKERHUB_USERNAME.
 Répétez les étapes 1 à 4 pour créer le deuxième secret :
 
@@ -100,7 +100,7 @@ jobs:
       with:
         context: .
         push: true
-        tags: jeromey34/client-docker-react:latest
+        tags: jeromev34/client-docker-react:latest
 ```
 
 Cette GitHub Action se déclenchera à chaque push sur la branche `main`. Elle se connectera à Docker Hub en utilisant les secrets configurés, puis construira et poussera votre image Docker vers le dépôt `jeromey34/client-docker-react` avec le tag `latest`.
