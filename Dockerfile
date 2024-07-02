@@ -22,8 +22,11 @@ FROM nginx:1.21.0-alpine
 # Copiez les fichiers construits de l'étape précédente
 COPY --from=build /app/build /usr/share/nginx/html
 
-# Exposez le port 80 pour accéder à l'application
-EXPOSE 80
+# Copiez un fichier de configuration Nginx personnalisé
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+# Exposez le port 8080 pour accéder à l'application
+EXPOSE 8080
 
 # Démarrez Nginx lorsque le conteneur est lancé
 CMD ["nginx", "-g", "daemon off;"]
