@@ -23,7 +23,7 @@ function Navbar() {
 
     return (
         <>
-            <AppBar position="static">
+            <AppBar position="static" color="transparent" elevation={0} sx={{ borderBottom: '1px solid black' }}>
                 <Toolbar>
                     <IconButton
                         size="large"
