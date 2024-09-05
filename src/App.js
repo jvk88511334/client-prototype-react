@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useMemo } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -11,22 +11,49 @@ import LoginView from "./views/LoginView";
 import RegisterView from './views/RegisterView';
 import ForgotPasswordView from './views/ForgotPasswordView';
 
-const theme = createTheme({
-    palette: {
-        primary: {
-            main: '#1976d2', // Couleur primaire
-        },
-        secondary: {
-            main: '#dc004e', // Couleur secondaire
-        },
-        background: {
-            default: '#ffffff', // Couleur de fond par défaut
-        },
-    },
-    // Vous pouvez personnaliser d'autres aspects du thème ici
-});
-
 function App() {
+    const [mode, setMode] = useState('light');
+
+    const theme = useMemo(
+        () =>
+            createTheme({
+                palette: {
+                    mode,
+                    ...(mode === 'light'
+                        ? {
+                            // Palette pour le thème clair
+                            primary: {
+                                main: '#1976d2',
+                            },
+                            background: {
+                                default: '#ffffff',
+                            },
+                            text: {
+                                primary: '#000000',
+                            },
+                        }
+                        : {
+                            // Palette pour le thème sombre
+                            primary: {
+                                main: '#ffffff',
+                            },
+                            background: {
+                                default: '#000000',
+                                paper: '#000000',
+                            },
+                            text: {
+                                primary: '#ffffff',
+                            },
+                        }),
+                },
+            }),
+        [mode]
+    );
+
+    const toggleTheme = () => {
+        setMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));
+    };
+
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline />
@@ -43,7 +70,7 @@ function App() {
                         <Route path="/forgot-password" element={<ForgotPasswordView />} />
                     </Routes>
                 </main>
-                <Footer />
+                <Footer toggleTheme={toggleTheme} />
             </div>
         </Router>
         </ThemeProvider>

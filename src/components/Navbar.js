@@ -1,10 +1,11 @@
 import React, {useState} from 'react';
-import {AppBar, Toolbar, IconButton, Typography, Button} from '@mui/material';
+import {AppBar, Toolbar, IconButton, Typography, Button, useTheme} from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import SideDrawer from './SideDrawer';
 import { Link as RouterLink } from 'react-router-dom';
 
 function Navbar() {
+    const theme = useTheme();
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -23,7 +24,7 @@ function Navbar() {
 
     return (
         <>
-            <AppBar position="static" color="transparent" elevation={0} sx={{ borderBottom: '1px solid black' }}>
+            <AppBar position="static" color="transparent" elevation={0} sx={{ borderBottom: `1px solid ${theme.palette.text.primary}` }}>
                 <Toolbar>
                     <IconButton
                         size="large"
