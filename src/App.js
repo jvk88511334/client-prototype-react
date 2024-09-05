@@ -61,10 +61,10 @@ function App() {
             <CssBaseline />
         <Router>
             <div className="App" style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
-                <Navbar />
+                <Navbar toggleTheme={toggleTheme} />
                 <SubNavbar />
                 <Breadcrumb />
-                <main style={{ flex: 1 }}>
+                <main style={{ flex: 1 }}>  
                     <Routes>
                         <Route path="/" element={<HomeView1 />} />
                         <Route path="/view2" element={<HomeView2 />} />

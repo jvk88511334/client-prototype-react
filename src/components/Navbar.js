@@ -3,8 +3,10 @@ import {AppBar, Toolbar, IconButton, Typography, Button, useTheme} from '@mui/ma
 import MenuIcon from '@mui/icons-material/Menu';
 import SideDrawer from './SideDrawer';
 import { Link as RouterLink } from 'react-router-dom';
+import Brightness4Icon from '@mui/icons-material/Brightness4';
+import Brightness7Icon from '@mui/icons-material/Brightness7';
 
-function Navbar() {
+function Navbar({ toggleTheme }) {
     const theme = useTheme();
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -39,6 +41,9 @@ function Navbar() {
                     <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                         Nom de l'Application
                     </Typography>
+                    <IconButton color="inherit" onClick={toggleTheme} sx={{ mr: 1 }}>
+                        {theme.palette.mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
+                    </IconButton>
                     <Button color="inherit" component={RouterLink} to="/login">
                         Connexion
                     </Button>
