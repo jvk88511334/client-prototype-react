@@ -5,11 +5,13 @@ import CssBaseline from '@mui/material/CssBaseline';
 import HomeView1 from './views/HomeView1';
 import HomeView2 from './views/HomeView2';
 import HomeView3 from './views/HomeView3';
+import SubNavbar from './components/SubNavbar';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import LoginView from "./views/LoginView";
 import RegisterView from './views/RegisterView';
 import ForgotPasswordView from './views/ForgotPasswordView';
+import Breadcrumb from './components/Breadcrumb';
 
 function App() {
     const [mode, setMode] = useState('light');
@@ -60,6 +62,8 @@ function App() {
         <Router>
             <div className="App" style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
                 <Navbar />
+                <SubNavbar />
+                <Breadcrumb />
                 <main style={{ flex: 1 }}>
                     <Routes>
                         <Route path="/" element={<HomeView1 />} />
