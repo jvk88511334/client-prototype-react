@@ -1,0 +1,16 @@
+{
+  "home": [
+    { "id": 1, "name": "France Musique mp3", "streamUrl": "http://direct.francemusique.fr/live/francemusique-midfi.mp3" },
+    { "id": 2, "name": "Zouk Station asx", "streamUrl": "http://www.zoukstation/zoukstation.asx" },
+    { "id": 3, "name": "Radio Home 3", "streamUrl": "https://edef7.pcloud.com/cBZVlm2zhZ1K9Y5GZZZdTMCkkZ2ZZGW0ZkZxiFOZ0XZlkZMVZ5JZPXZG7ZF0ZIVZd0ZLJZ5VZRVZx0ZHJZ2DDPZbpqauNwK7q5cFdpFYRWmWX5xBWtX/04%20-%20ABBA%20-%20Lay%20All%20Your%20Love%20On%20Me.mp3" }
+  ],
+  "view2": [
+    { "id": 4, "name": "Radio View2 1", "streamUrl": "http://example.com/radio-view2-1" },
+    { "id": 5, "name": "Radio View2 2", "streamUrl": "http://example.com/radio-view2-2" }
+  ],
+  "view3": [
+    { "id": 6, "name": "Radio View3 1", "streamUrl": "http://example.com/radio-view3-1" },
+    { "id": 7, "name": "Radio View3 2", "streamUrl": "http://example.com/radio-view3-2" },
+    { "id": 8, "name": "Radio View3 3", "streamUrl": "http://example.com/radio-view3-3" }
+  ]
+}

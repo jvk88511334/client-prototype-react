@@ -1,3 +1,4 @@
+// App.js
 import React, { useState, useMemo } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
@@ -12,6 +13,9 @@ import LoginView from "./views/LoginView";
 import RegisterView from './views/RegisterView';
 import ForgotPasswordView from './views/ForgotPasswordView';
 import Breadcrumb from './components/Breadcrumb';
+import RadioPlayer from './components/RadioPlayer';
+import radioLists from './data/radioLists.json';
+import { AudioProvider } from './AudioContext';
 
 function App() {
     const [mode, setMode] = useState('light');
@@ -23,7 +27,6 @@ function App() {
                     mode,
                     ...(mode === 'light'
                         ? {
-                            // Palette pour le thème clair
                             primary: {
                                 main: '#1976d2',
                             },
@@ -35,7 +38,6 @@ function App() {
                             },
                         }
                         : {
-                            // Palette pour le thème sombre
                             primary: {
                                 main: '#ffffff',
                             },
@@ -59,24 +61,27 @@ function App() {
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline />
-        <Router>
-            <div className="App" style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
-                <Navbar toggleTheme={toggleTheme} />
-                <SubNavbar />
-                <Breadcrumb />
-                <main style={{ flex: 1 }}>  
-                    <Routes>
-                        <Route path="/" element={<HomeView1 />} />
-                        <Route path="/view2" element={<HomeView2 />} />
-                        <Route path="/view3" element={<HomeView3 />} />
-                        <Route path="/login" element={<LoginView />} />
-                        <Route path="/register" element={<RegisterView />} />
-                        <Route path="/forgot-password" element={<ForgotPasswordView />} />
-                    </Routes>
-                </main>
-                <Footer toggleTheme={toggleTheme} />
-            </div>
-        </Router>
+            <AudioProvider>
+                <Router>
+                    <div className="App" style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+                        <Navbar toggleTheme={toggleTheme} />
+                        <SubNavbar />
+                        <Breadcrumb />
+                        <main style={{ flex: 1, paddingBottom: '60px' }}>
+                            <Routes>
+                                <Route path="/" element={<HomeView1 />} />
+                                <Route path="/view2" element={<HomeView2 />} />
+                                <Route path="/view3" element={<HomeView3 />} />
+                                <Route path="/login" element={<LoginView />} />
+                                <Route path="/register" element={<RegisterView />} />
+                                <Route path="/forgot-password" element={<ForgotPasswordView />} />
+                            </Routes>
+                        </main>
+                        <RadioPlayer radios={radioLists.home} />
+                        <Footer toggleTheme={toggleTheme} />
+                    </div>
+                </Router>
+            </AudioProvider>
         </ThemeProvider>
     );
 }
