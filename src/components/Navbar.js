@@ -41,8 +41,8 @@ function Navbar({ toggleTheme }) {
                     </IconButton>
                     <Box sx={{ flexGrow: 1 }} />
                     {!isMobile && (
-                        <Typography variant="h6" component="div" sx={{ fontWeight: 'bold', position: 'absolute', left: '50%', transform: 'translateX(-50%)' }}>
-                            Nom de l'Application
+                        <Typography variant="h3" component="div" sx={{ fontWeight: 'bold', position: 'absolute', left: '50%', transform: 'translateX(-50%)' }}>
+                            Flux
                         </Typography>
                     )}
                     <Box sx={{ flexGrow: 1 }} />

@@ -3,7 +3,7 @@ import { Toolbar, Button, Box, useTheme } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 
 const navItems = [
-    { name: 'Analyse', path: '/analyse' },
+    { name: 'Analyse', path: '/view' },
     { name: 'Opinion', path: '/opinion' },
     { name: 'Critique', path: '/critique' },
     { name: 'Entretien', path: '/entretien' },
