@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {AppBar, Toolbar, IconButton, Typography, Button, useTheme} from '@mui/material';
+import {AppBar, Toolbar, IconButton, Typography, Button, useTheme, Box, useMediaQuery} from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import SideDrawer from './SideDrawer';
 import { Link as RouterLink } from 'react-router-dom';
@@ -10,6 +10,7 @@ function Navbar({ toggleTheme }) {
     const theme = useTheme();
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
     const handleDrawerOpen = () => {
         setIsDrawerOpen(true);
@@ -38,9 +39,13 @@ function Navbar({ toggleTheme }) {
                     >
                         <MenuIcon />
                     </IconButton>
-                    <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                        Nom de l'Application
-                    </Typography>
+                    <Box sx={{ flexGrow: 1 }} />
+                    {!isMobile && (
+                        <Typography variant="h3" component="div" sx={{ position: 'absolute', left: '50%', transform: 'translateX(-50%)' }}>
+                            Flux
+                        </Typography>
+                    )}
+                    <Box sx={{ flexGrow: 1 }} />
                     <IconButton color="inherit" onClick={toggleTheme} sx={{ mr: 1 }}>
                         {theme.palette.mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
                     </IconButton>
