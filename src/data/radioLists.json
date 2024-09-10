@@ -1,8 +1,8 @@
 {
   "home": [
-    { "id": 1, "name": "France Musique mp3", "streamUrl": "http://direct.francemusique.fr/live/francemusique-midfi.mp3" },
+    { "id": 1, "name": "France Musique", "streamUrl": "http://direct.francemusique.fr/live/francemusique-midfi.mp3" },
     { "id": 2, "name": "Zouk Station asx", "streamUrl": "http://www.zoukstation/zoukstation.asx" },
-    { "id": 3, "name": "Radio Home 3", "streamUrl": "https://edef7.pcloud.com/cBZVlm2zhZ1K9Y5GZZZdTMCkkZ2ZZGW0ZkZxiFOZ0XZlkZMVZ5JZPXZG7ZF0ZIVZd0ZLJZ5VZRVZx0ZHJZ2DDPZbpqauNwK7q5cFdpFYRWmWX5xBWtX/04%20-%20ABBA%20-%20Lay%20All%20Your%20Love%20On%20Me.mp3" }
+    { "id": 3, "name": "Titre pcloud", "streamUrl": "https://edef4.pcloud.com/cBZLpY75VZBMz75GZZZgqvCkkZ2ZZGW0ZkZYE7UZg7ZL0ZmVZyJZskZh0ZukZ50ZQXZ5JZakZ9VZ4FZpkZpK1PZX9nFwgMGR7bm2ftyRskoJh95lQvy/001%20-%20Montell%20Jordan%20-%20This%20Is%20How%20We%20Do%20It.mp3" }
   ],
   "view2": [
     { "id": 4, "name": "Radio View2 1", "streamUrl": "http://example.com/radio-view2-1" },

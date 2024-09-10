@@ -1,5 +1,5 @@
 // RadioPlayer.js
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTheme } from '@mui/material/styles';
 import { Slider } from '@mui/material';
 import { useAudio } from '../AudioContext';
@@ -37,19 +37,84 @@ const PauseIcon = ({ color }) => (
     </svg>
 );
 
+const TimerOffIcon = ({ color }) => (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9zm-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8H12z" fill={color} />
+    </svg>
+);
+
+const Timer30Icon = ({ color }) => (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M15 1H9v2h6V1zm-4 13h2V8h-2v6zm8.03-6.61l1.42-1.42c-.43-.51-.9-.99-1.41-1.41l-1.42 1.42C16.07 4.74 14.12 4 12 4c-4.97 0-9 4.03-9 9s4.02 9 9 9 9-4.03 9-9c0-2.12-.74-4.07-1.97-5.61zM12 20c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z" fill={color} />
+        <text x="7" y="17" fontFamily="Arial" fontSize="6" fill={color}>30</text>
+    </svg>
+);
+
+const Timer60Icon = ({ color }) => (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M15 1H9v2h6V1zm-4 13h2V8h-2v6zm8.03-6.61l1.42-1.42c-.43-.51-.9-.99-1.41-1.41l-1.42 1.42C16.07 4.74 14.12 4 12 4c-4.97 0-9 4.03-9 9s4.02 9 9 9 9-4.03 9-9c0-2.12-.74-4.07-1.97-5.61zM12 20c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z" fill={color} />
+        <text x="7" y="17" fontFamily="Arial" fontSize="6" fill={color}>60</text>
+    </svg>
+);
+
+const DownloadIcon = ({ color }) => (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z" fill={color} />
+    </svg>
+);
+
 const formatTime = (time) => {
     const minutes = Math.floor(time / 60);
     const seconds = Math.floor(time % 60);
     return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
 };
 
-const RadioPlayer = ({ radios = [] }) => {
+const RadioPlayer = ({ radios = [], enableDownload = false }) => {
     const { currentRadio, isPlaying, currentTrack, duration, currentTime, playRadio, togglePlay, seek } = useAudio();
+    const [timerState, setTimerState] = useState(0); // 0: off, 1: 30min, 2: 60min
+    const [remainingTime, setRemainingTime] = useState(0);
     const theme = useTheme();
 
     const handleSliderChange = (event, newValue) => {
         seek(newValue);
     };
+
+    const handleTimerClick = () => {
+        setTimerState((prevState) => (prevState + 1) % 3);
+        switch ((timerState + 1) % 3) {
+            case 1:
+                setRemainingTime(30 * 60); // 30 minutes
+                break;
+            case 2:
+                setRemainingTime(60 * 60); // 60 minutes
+                break;
+            case 0:
+                setRemainingTime(0); // Timer off
+                break;
+            default:
+                console.warn("État de minuterie inattendu");
+                setRemainingTime(0);
+                break;
+        }
+    };
+
+    useEffect(() => {
+        let interval;
+        if (remainingTime > 0 && isPlaying) {
+            interval = setInterval(() => {
+                setRemainingTime((prevTime) => {
+                    if (prevTime <= 1) {
+                        clearInterval(interval);
+                        togglePlay(); // Stop playback
+                        setTimerState(0); // Reset timer state
+                        return 0;
+                    }
+                    return prevTime - 1;
+                });
+            }, 1000);
+        }
+        return () => clearInterval(interval);
+    }, [remainingTime, isPlaying, togglePlay]);
 
     const playerStyle = {
         position: 'fixed',
@@ -66,7 +131,27 @@ const RadioPlayer = ({ radios = [] }) => {
         zIndex: 1000,
     };
 
-    const isSpecificMP3 = currentRadio?.streamUrl.toLowerCase().endsWith('.mp3') && duration > 0 && duration !== Infinity;
+    const isMP3WithDuration = currentRadio?.streamUrl.toLowerCase().endsWith('.mp3') && duration > 0 && duration !== Infinity;
+    const isDownloadable = enableDownload && isMP3WithDuration;
+
+    const handleDownload = () => {
+        if (currentRadio && isDownloadable) {
+            const link = document.createElement('a');
+            link.href = currentRadio.streamUrl;
+            link.download = `${currentRadio.name || 'audio'}.mp3`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    };
+
+    const getTimerIcon = () => {
+        switch (timerState) {
+            case 1: return <Timer30Icon color={theme.palette.text.primary} />;
+            case 2: return <Timer60Icon color={theme.palette.text.primary} />;
+            default: return <TimerOffIcon color={theme.palette.text.primary} />;
+        }
+    };
 
     return (
         <>
@@ -76,7 +161,7 @@ const RadioPlayer = ({ radios = [] }) => {
                     display: 'flex',
                     justifyContent: 'space-between',
                     alignItems: 'center',
-                    minHeight: '48px', // Utilisation de minHeight au lieu de height fixe
+                    minHeight: '48px',
                 }}>
                     <div style={{
                         display: 'flex',
@@ -85,34 +170,64 @@ const RadioPlayer = ({ radios = [] }) => {
                     }}>
                         <div style={{
                             fontWeight: 'bold',
-                            marginBottom: '0.25rem' // Ajout d'une marge entre le titre et les métadonnées
+                            marginBottom: '0.25rem'
                         }}>
                             {currentRadio?.name || 'Aucune radio sélectionnée'}
                         </div>
                         <div style={{
                             fontSize: '0.875rem',
-                            opacity: 0.7 // Légère réduction de l'opacité pour différencier visuellement
+                            opacity: 0.7
                         }}>
                             {currentTrack || 'Titre inconnu'}
                         </div>
                     </div>
-                    <button
-                        onClick={togglePlay}
-                        style={{
-                            background: 'none',
-                            border: 'none',
-                            cursor: 'pointer',
-                            padding: '8px',
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                        }}
-                        aria-label={isPlaying ? "Pause" : "Play"}
-                    >
-                        {isPlaying ? <PauseIcon color={theme.palette.text.primary} /> : <PlayIcon color={theme.palette.text.primary} />}
-                    </button>
+                    <div style={{ display: 'flex', alignItems: 'center' }}>
+                        {isDownloadable && (
+                            <button
+                                onClick={handleDownload}
+                                style={{
+                                    background: 'none',
+                                    border: 'none',
+                                    cursor: 'pointer',
+                                    padding: '8px',
+                                    marginRight: '8px',
+                                }}
+                                aria-label="Télécharger"
+                            >
+                                <DownloadIcon color={theme.palette.text.primary} />
+                            </button>
+                        )}
+                        <button
+                            onClick={handleTimerClick}
+                            style={{
+                                background: 'none',
+                                border: 'none',
+                                cursor: 'pointer',
+                                padding: '8px',
+                                marginRight: '8px',
+                            }}
+                            aria-label="Minuterie"
+                        >
+                            {getTimerIcon()}
+                        </button>
+                        <button
+                            onClick={togglePlay}
+                            style={{
+                                background: 'none',
+                                border: 'none',
+                                cursor: 'pointer',
+                                padding: '8px',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                            }}
+                            aria-label={isPlaying ? "Pause" : "Play"}
+                        >
+                            {isPlaying ? <PauseIcon color={theme.palette.text.primary} /> : <PlayIcon color={theme.palette.text.primary} />}
+                        </button>
+                    </div>
                 </div>
-                {isSpecificMP3 && (
+                {isMP3WithDuration && (
                     <div style={{ display: 'flex', alignItems: 'center', marginTop: '0.5rem' }}>
                         <span style={{ marginRight: '0.5rem', minWidth: '45px', textAlign: 'right' }}>{formatTime(currentTime)}</span>
                         <Slider
