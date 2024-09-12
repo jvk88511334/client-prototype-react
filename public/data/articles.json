@@ -1,0 +1,20 @@
+{
+  "articles": [
+    {
+      "id": 1,
+      "theme": "Analyse",
+      "date": "2024-09-10",
+      "title": "L'écologie nucléaire face à son renouvellement",
+      "authors": ["Martin Denoun", "Ange Pottin"],
+      "content": "Généralement remise à l'arrière-plan des représentations publiques du nucléaire au profit de la seule « vision réacteur », l'infrastructure massive, complexe et fragile du « cycle du combustible »..."
+    },
+    {
+      "id": 2,
+      "theme": "Opinion",
+      "date": "2024-09-11",
+      "title": "Les défis de l'intelligence artificielle",
+      "authors": ["Sophie Dubois"],
+      "content": "L'essor rapide de l'intelligence artificielle soulève de nombreuses questions éthiques et sociétales..."
+    }
+  ]
+}

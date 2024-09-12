@@ -3,15 +3,12 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import HomeView from './views/HomeView';
-//import HomeView1 from './views/HomeView1';
-import HomeView2 from './views/HomeView2';
-import HomeView3 from './views/HomeView3';
+import AlbumView from './views/AlbumView';
+import BookView from './views/BookView';
+import RadioView from './views/RadioView';
+import ArticleView from './views/ArticleView';
 import SubNavbar from './components/SubNavbar';
 import Navbar from './components/Navbar';
-// import Footer from './components/Footer';
-import LoginView from "./views/LoginView";
-import RegisterView from './views/RegisterView';
-import ForgotPasswordView from './views/ForgotPasswordView';
 import Breadcrumb from './components/Breadcrumb';
 
 function App() {
@@ -24,7 +21,6 @@ function App() {
                     mode,
                     ...(mode === 'light'
                         ? {
-                            // Palette pour le thème clair
                             primary: {
                                 main: '#1976d2',
                             },
@@ -36,7 +32,6 @@ function App() {
                             },
                         }
                         : {
-                            // Palette pour le thème sombre
                             primary: {
                                 main: '#ffffff',
                             },
@@ -60,24 +55,22 @@ function App() {
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline />
-        <Router>
-            <div className="App" style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
-                <Navbar toggleTheme={toggleTheme} />
-                <SubNavbar />
-                <Breadcrumb />
-                <main style={{ flex: 1 }}>  
-                    <Routes>
-                        <Route path="/" element={<HomeView />} />
-                        <Route path="/view2" element={<HomeView2 />} />
-                        <Route path="/view3" element={<HomeView3 />} />
-                        <Route path="/login" element={<LoginView />} />
-                        <Route path="/register" element={<RegisterView />} />
-                        <Route path="/forgot-password" element={<ForgotPasswordView />} />
-                    </Routes>
-                </main>
-                {/*<Footer toggleTheme={toggleTheme} />*/}
-            </div>
-        </Router>
+            <Router>
+                <div className="App" style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+                    <Navbar toggleTheme={toggleTheme} />
+                    <SubNavbar />
+                    <Breadcrumb />
+                    <main style={{ flex: 1 }}>
+                        <Routes>
+                            <Route path="/" element={<HomeView />} />
+                            <Route path="/album/:identifier" element={<AlbumView />} />
+                            <Route path="/book/:identifier" element={<BookView />} />
+                            <Route path="/radio/:identifier" element={<RadioView />} />
+                            <Route path="/article/:identifier" element={<ArticleView />} />
+                        </Routes>
+                    </main>
+                </div>
+            </Router>
         </ThemeProvider>
     );
 }
