@@ -38,10 +38,6 @@ function HomeView() {
             </Grid>
             <Grid item xs={0} sm={1} md={3} sx={{ bgcolor: 'none' }}></Grid>
         </Grid>
-        <div>
-            <h1>Page d'Accueil</h1>
-            <MyComponent/>
-        </div>
     );
 }
 

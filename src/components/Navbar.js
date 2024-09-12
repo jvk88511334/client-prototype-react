@@ -41,18 +41,10 @@ function Navbar({ toggleTheme }) {
                     </IconButton>
                     <Box sx={{ flexGrow: 1 }} />
                     {!isMobile && (
-                        <Typography variant="h3" component="div" sx={{ fontWeight: 'bold', position: 'absolute', left: '50%', transform: 'translateX(-50%)' }}>
-                            Flux
-                        </Typography>
-                    )}
-                    <Box sx={{ flexGrow: 1 }} />
-                    <Box sx={{ flexGrow: 1 }} />
-                    {!isMobile && (
                         <Typography variant="h3" component="div" sx={{ position: 'absolute', left: '50%', transform: 'translateX(-50%)' }}>
                             Flux
                         </Typography>
                     )}
-                    <Box sx={{ flexGrow: 1 }} />
                     <IconButton color="inherit" onClick={toggleTheme} sx={{ mr: 1 }}>
                         {theme.palette.mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
                     </IconButton>

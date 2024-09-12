@@ -65,33 +65,12 @@ function App() {
                         <Breadcrumb />
                         <main style={{ flex: 1, paddingBottom: '60px' }}>
                             <Routes>
-                                <Route path="/" element={<HomeView1 />} />
-                                <Route path="/view" element={<HomeView />} />
-                                <Route path="/view3" element={<HomeView3 />} />
-                                <Route path="/login" element={<LoginView />} />
-                                <Route path="/register" element={<RegisterView />} />
-                                <Route path="/forgot-password" element={<ForgotPasswordView />} />
+                                <Route path="/" element={<RadioView />} />
                             </Routes>
                         </main>
                     </div>
                 </Router>
             </AudioProvider>
-            <Router>
-                <div className="App" style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
-                    <Navbar toggleTheme={toggleTheme} />
-                    <SubNavbar />
-                    <Breadcrumb />
-                    <main style={{ flex: 1 }}>
-                        <Routes>
-                            <Route path="/" element={<HomeView />} />
-                            <Route path="/album/:identifier" element={<AlbumView />} />
-                            <Route path="/book/:identifier" element={<BookView />} />
-                            <Route path="/radio/:identifier" element={<RadioView />} />
-                            <Route path="/article/:identifier" element={<ArticleView />} />
-                        </Routes>
-                    </main>
-                </div>
-            </Router>
         </ThemeProvider>
     );
 }
