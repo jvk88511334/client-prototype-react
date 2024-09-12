@@ -4,14 +4,12 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import HomeView from './views/HomeView';
-import HomeView1 from './views/HomeView1';
-import HomeView2 from './views/HomeView2';
-import HomeView3 from './views/HomeView3';
+import AlbumView from './views/AlbumView';
+import BookView from './views/BookView';
+import RadioView from './views/RadioView';
+import ArticleView from './views/ArticleView';
 import SubNavbar from './components/SubNavbar';
 import Navbar from './components/Navbar';
-import LoginView from "./views/LoginView";
-import RegisterView from './views/RegisterView';
-import ForgotPasswordView from './views/ForgotPasswordView';
 import Breadcrumb from './components/Breadcrumb';
 import { AudioProvider } from './AudioContext';
 
@@ -78,6 +76,22 @@ function App() {
                     </div>
                 </Router>
             </AudioProvider>
+            <Router>
+                <div className="App" style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+                    <Navbar toggleTheme={toggleTheme} />
+                    <SubNavbar />
+                    <Breadcrumb />
+                    <main style={{ flex: 1 }}>
+                        <Routes>
+                            <Route path="/" element={<HomeView />} />
+                            <Route path="/album/:identifier" element={<AlbumView />} />
+                            <Route path="/book/:identifier" element={<BookView />} />
+                            <Route path="/radio/:identifier" element={<RadioView />} />
+                            <Route path="/article/:identifier" element={<ArticleView />} />
+                        </Routes>
+                    </main>
+                </div>
+            </Router>
         </ThemeProvider>
     );
 }

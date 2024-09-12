@@ -1,0 +1,14 @@
+{
+  "radios": [
+    {
+      "id": 1,
+      "name": "France Inter",
+      "category": "Généraliste"
+    },
+    {
+      "id": 2,
+      "name": "FIP",
+      "category": "Musicale"
+    }
+  ]
+}
