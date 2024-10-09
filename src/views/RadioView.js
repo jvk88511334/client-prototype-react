@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
 import { Typography, Grid, Box, List, ListItem, ListItemText } from '@mui/material';
 
 function RadioView() {
     const [radios, setRadios] = useState([]);
     const [error, setError] = useState(null);
-    const { identifier } = useParams();
 
     useEffect(() => {
         fetch('/data/radios.json')
@@ -44,12 +42,12 @@ function RadioView() {
                         }}
                     >
                         <Typography variant="h2" component="h1" gutterBottom sx={{ mt: 4, mb: 2 }}>
-                            Radios
+                            Radio
                         </Typography>
                     </Box>
-                    <Typography variant="body1" sx={{ mt: 2, mb: 2 }}>
+                    {/*<Typography variant="body1" sx={{ mt: 2, mb: 2 }}>
                         Découvrez notre sélection de radios classées par catégorie.
-                    </Typography>
+                    </Typography>*/}
                     <List>
                         {radios.map((radio, index) => (
                             <ListItem key={radio.id}>
@@ -62,7 +60,7 @@ function RadioView() {
                                     secondary={
                                         <>
                                             <Typography variant="subtitle1">
-                                                Catégorie : {radio.category}
+                                                {radio.category}
                                             </Typography>
                                             {radio.description && (
                                                 <Typography variant="body2" sx={{ mt: 1 }}>

@@ -3,14 +3,7 @@ import React, { useState, useMemo } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
-import HomeView from './views/HomeView';
-import AlbumView from './views/AlbumView';
-import BookView from './views/BookView';
 import RadioView from './views/RadioView';
-import ArticleView from './views/ArticleView';
-import SubNavbar from './components/SubNavbar';
-import Navbar from './components/Navbar';
-import Breadcrumb from './components/Breadcrumb';
 import { AudioProvider } from './AudioContext';
 
 function App() {
@@ -21,7 +14,7 @@ function App() {
             createTheme({
                 palette: {
                     mode,
-                    ...(mode === 'light'
+                    ...(mode === 'dark'
                         ? {
                             primary: {
                                 main: '#1976d2',
@@ -42,7 +35,8 @@ function App() {
                                 paper: '#000000',
                             },
                             text: {
-                                primary: '#ffffff',
+                                primary: '#d5bdaf',
+                                secondary: '#e3d5ca',
                             },
                         }),
                 },
@@ -60,9 +54,9 @@ function App() {
             <AudioProvider>
                 <Router>
                     <div className="App" style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
-                        <Navbar toggleTheme={toggleTheme} />
-                        <SubNavbar />
-                        <Breadcrumb />
+                        {/*<Navbar toggleTheme={toggleTheme} />*/}
+                        {/*<SubNavbar />*/}
+                        {/*<Breadcrumb />*/}
                         <main style={{ flex: 1, paddingBottom: '60px' }}>
                             <Routes>
                                 <Route path="/" element={<RadioView />} />
