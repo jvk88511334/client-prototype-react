@@ -10,7 +10,7 @@
     { "id": 7, "name": "DJAM Radio", "genre": "Chill / Lounge", "streamUrl": "https://stream9.xdevel.com/audio1s976748-1515/stream/icecast.audio" },
 
     { "id": 8, "name": "Radio Classique Montreal", "genre": "Classique", "streamUrl": "https://listen.radioking.com/radio/228241/stream/271804" },
-    { "id": 9, "name": "Radio Swiss Classic", "genre": "Classic", "streamUrl": "https://stream.srg-ssr.ch/m/rsc_fr/mp3_128" },
+    { "id": 9, "name": "Radio Swiss Classic", "genre": "Classique", "streamUrl": "https://stream.srg-ssr.ch/m/rsc_fr/mp3_128" },
 
     { "id": 10, "name": "Kosmos Jazz", "genre": "Jazz", "streamUrl": "https://radiostreaming.ert.gr/ert-webjazz" },
     { "id": 11, "name": "Radio Swiss Jazz", "genre": "Jazz", "streamUrl": "https://stream.srg-ssr.ch/m/rsj/mp3_128" },
