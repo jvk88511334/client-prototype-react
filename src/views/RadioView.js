@@ -1,33 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { Typography, Grid, Box, List, ListItem, ListItemText } from '@mui/material';
+import { Typography, Grid, Box, List } from '@mui/material';
+import RadioPlayer from '../components/RadioPlayer';
+import radioLists from '../data/radios.json';
 
 function RadioView() {
-    const [radios, setRadios] = useState([]);
-    const [error, setError] = useState(null);
-
-    useEffect(() => {
-        fetch('/data/radios.json')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                return response.json();
-            })
-            .then(data => {
-                if (!Array.isArray(data.radios) || data.radios.length === 0) {
-                    throw new Error('No radios found');
-                }
-                setRadios(data.radios);
-            })
-            .catch(error => {
-                console.error('Error loading radios:', error);
-                setError(error.message);
-            });
-    }, []);
-
-    if (error) return <div>Erreur : {error}</div>;
-    if (radios.length === 0) return <div>Chargement...</div>;
-
     return (
         <Grid container>
             <Grid item xs={0.5} sm={1} md={3.5} sx={{ bgcolor: 'none' }}></Grid>
@@ -35,7 +10,7 @@ function RadioView() {
                 <Box sx={{ p: 3, marginTop: '-2em' }}>
                     <Box
                         sx={{
-                            borderBottom: '4px solid #FF4500',
+                            borderBottom: '4px solid #830000',
                             display: 'block',
                             pb: 1,
                             mb: 2
@@ -45,33 +20,8 @@ function RadioView() {
                             Radio
                         </Typography>
                     </Box>
-                    {/*<Typography variant="body1" sx={{ mt: 2, mb: 2 }}>
-                        Découvrez notre sélection de radios classées par catégorie.
-                    </Typography>*/}
                     <List>
-                        {radios.map((radio, index) => (
-                            <ListItem key={radio.id}>
-                                <ListItemText
-                                    primary={
-                                        <Typography variant="h6">
-                                            {radio.name}
-                                        </Typography>
-                                    }
-                                    secondary={
-                                        <>
-                                            <Typography variant="subtitle1">
-                                                {radio.category}
-                                            </Typography>
-                                            {radio.description && (
-                                                <Typography variant="body2" sx={{ mt: 1 }}>
-                                                    {radio.description}
-                                                </Typography>
-                                            )}
-                                        </>
-                                    }
-                                />
-                            </ListItem>
-                        ))}
+                        <RadioPlayer radios={radioLists.listeA} />
                     </List>
                 </Box>
             </Grid>

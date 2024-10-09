@@ -7,14 +7,14 @@ import RadioView from './views/RadioView';
 import { AudioProvider } from './AudioContext';
 
 function App() {
-    const [mode, setMode] = useState('light');
+    const [mode] = useState('dark');
 
     const theme = useMemo(
         () =>
             createTheme({
                 palette: {
                     mode,
-                    ...(mode === 'dark'
+                    ...(mode === 'light'
                         ? {
                             primary: {
                                 main: '#1976d2',
@@ -35,7 +35,7 @@ function App() {
                                 paper: '#000000',
                             },
                             text: {
-                                primary: '#d5bdaf',
+                                primary: '#e3d5ca',
                                 secondary: '#e3d5ca',
                             },
                         }),
@@ -44,19 +44,12 @@ function App() {
         [mode]
     );
 
-    const toggleTheme = () => {
-        setMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));
-    };
-
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline />
             <AudioProvider>
                 <Router>
                     <div className="App" style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
-                        {/*<Navbar toggleTheme={toggleTheme} />*/}
-                        {/*<SubNavbar />*/}
-                        {/*<Breadcrumb />*/}
                         <main style={{ flex: 1, paddingBottom: '60px' }}>
                             <Routes>
                                 <Route path="/" element={<RadioView />} />

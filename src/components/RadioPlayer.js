@@ -9,19 +9,68 @@ const RadioList = ({ radios, onRadioSelect }) => {
         return <p>Aucune radio disponible</p>;
     }
 
+    // Diviser la liste en deux colonnes
+    const midpoint = Math.ceil(radios.length / 2);
+    const leftColumn = radios.slice(0, midpoint);
+    const rightColumn = radios.slice(midpoint);
+
     return (
-        <ul style={{ listStyle: 'none', padding: 0 }}>
-            {radios.map(radio => (
-                <li key={radio.id} style={{ marginBottom: '10px' }}>
-                    <button
-                        onClick={() => onRadioSelect(radio)}
-                        style={{ color: '#1976d2', cursor: 'pointer', background: 'none', border: 'none', padding: 0 }}
-                    >
-                        {radio.name}
-                    </button>
-                </li>
-            ))}
-        </ul>
+        <div style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            gap: '20px' // Espace entre les colonnes
+        }}>
+            {/* Colonne gauche */}
+            <div style={{ flex: 1 }}>
+                <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+                    {leftColumn.map(radio => (
+                        <li key={radio.id} style={{ marginBottom: '1.3em' }}>
+                            <button
+                                onClick={() => onRadioSelect(radio)}
+                                style={{
+                                    color: '#e3d5ca',
+                                    cursor: 'pointer',
+                                    background: 'none',
+                                    border: 'none',
+                                    padding: 0,
+                                    fontSize: '1.1em',
+                                    textAlign: 'left',
+                                    width: '100%'
+                                }}
+                            >
+                                {radio.name}
+                            </button>
+                            <div style={{ fontSize: '1em', color: 'grey' }}>{radio.genre}</div>
+                        </li>
+                    ))}
+                </ul>
+            </div>
+            {/* Colonne droite */}
+            <div style={{ flex: 1 }}>
+                <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+                    {rightColumn.map(radio => (
+                        <li key={radio.id} style={{ marginBottom: '1.3em' }}>
+                            <button
+                                onClick={() => onRadioSelect(radio)}
+                                style={{
+                                    color: '#e3d5ca',
+                                    cursor: 'pointer',
+                                    background: 'none',
+                                    border: 'none',
+                                    padding: 0,
+                                    fontSize: '1.1em',
+                                    textAlign: 'left',
+                                    width: '100%'
+                                }}
+                            >
+                                {radio.name}
+                            </button>
+                            <div style={{ fontSize: '1em', color: 'grey' }}>{radio.genre}</div>
+                        </li>
+                    ))}
+                </ul>
+            </div>
+        </div>
     );
 };
 
@@ -131,7 +180,7 @@ const RadioPlayer = ({ radios = [], enableDownload = false }) => {
         zIndex: 1000,
     };
 
-    const isMP3WithDuration = currentRadio?.streamUrl.toLowerCase().endsWith('.mp3') && duration > 0 && duration !== Infinity;
+    const isMP3WithDuration = false;
     const isDownloadable = enableDownload && isMP3WithDuration;
 
     const handleDownload = () => {
@@ -178,7 +227,7 @@ const RadioPlayer = ({ radios = [], enableDownload = false }) => {
                             fontSize: '0.875rem',
                             opacity: 0.7
                         }}>
-                            {currentTrack || 'Titre inconnu'}
+                            {currentTrack || 'Flux'}
                         </div>
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center' }}>
