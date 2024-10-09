@@ -2,7 +2,7 @@ name: Deploy to Docker Hub
 
 on:
   push:
-    branches: [radio]
+    branches: [main]
 
 jobs:
   build-and-push:
